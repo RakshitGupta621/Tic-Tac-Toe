@@ -15,17 +15,16 @@ const itemArray = new Array(9).fill("empty")
 
 const App = () => {
 
-    //Below is the use of React Hooks 
     const [isCross, setIsCross] = useState(false);
     const [winMessage, setWinMessage] = useState("");
 
-    const reloadGame = () => {//reloads game
-        setIsCross(false); //no cross by default
-        setWinMessage(""); //no win message printed initially
-        itemArray.fill("empty", 0, 9); //empty initially from 0 to 9
+    const reloadGame = () => {
+        setIsCross(false); 
+        setWinMessage("");
+        itemArray.fill("empty", 0, 9); 
     };
 
-    const checkIsWinner = () => { //checks winner
+    const checkIsWinner = () => { 
         if(//first row
             itemArray[0] === itemArray[1] &&
             itemArray[0] === itemArray[2] && 
@@ -79,17 +78,17 @@ const App = () => {
 
     /**https://fkhadra.github.io/react-toastify/introduction/ */
     const changeItem = itemNumber => {
-        if (winMessage) { //returns toast in color success
+        if (winMessage) { 
             return toast(winMessage, {type: "success", draggable: true});
         }
         if (itemArray[itemNumber] === "empty") {
-            itemArray[itemNumber] = isCross ? "cross" : "circle"    //if isCross is true then we set it to cross else circle
-            setIsCross(!isCross) //setCross initally was false so set it to cross now basically it flips intial value to circle and cross
-        } else {//returns toast in color error
+            itemArray[itemNumber] = isCross ? "cross" : "circle"   
+            setIsCross(!isCross) 
+        } else {
             return toast("already filled 👆", { type: "error",
             draggable: true })
         }
-        checkIsWinner(); //checks the winner this is the main logical part
+        checkIsWinner(); 
     };
 
     const toggleTheme = () => {
@@ -101,7 +100,7 @@ const App = () => {
     /**https://react-bootstrap.netlify.app/components/buttons/#buttons */
     return (
         <Container className="p-5">
-            <ToastContainer position="bottom-center" /> {/*This container is for the toast  */}
+            <ToastContainer position="bottom-center" />
             <Row>
                 <Col md="5" className="offset-md-3">
                     {winMessage ? (
@@ -118,8 +117,7 @@ const App = () => {
                             {isCross ? "Cross" : "Circle"} turns
                         </h1>
                     )}
-                    <div className="grid">{/*Here the grid is self defined classname whose style propertie are mentioned in the app.css*/}
-                    {/*The map loops through every single item in the itemArray and returns the index also.*/}
+                    <div className="grid">
                         {itemArray.map((item, index) => (
                             <Card color="info" onClick={ () => changeItem(index) }>
                                 <CardBody className="box">
