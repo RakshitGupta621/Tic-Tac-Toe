@@ -98,7 +98,7 @@ const App = () => {
             return toast(winMessage, {type: "success", draggable: true});
         }
         if (itemArray[itemNumber] === "empty") {
-            itemArray[itemNumber] = isCross ? ("cross"): ("circle")    else circle
+            itemArray[itemNumber] = isCross ? ("cross"): ("circle")   
             setIsCross(!isCross) 
            
         } else {
@@ -117,39 +117,39 @@ const App = () => {
     /**https://react-bootstrap.netlify.app/components/buttons/#buttons */
     return (
         <Container className="p-5">
-            <ToastContainer position="bottom-center" /> 
-            <Row>
-                <Col md="5" className="offset-md-3">
-                    {winMessage ? (
-                        <div className="d-grid gap-3 mb-2">
-                            <h1 className="text-warning text-uppercase text-center">
-                                {winMessage}
-                            </h1>
-                            <Button color="danger" size="lg" block onClick={reloadGame}>
-                                 Reload the game
-                            </Button>                           
-                        </div>
-                    ) : (
-                        <h1 className="text-center text-primary">
-                            {isCross ? "Cross" : "Circle"} turns
+        <ToastContainer position="bottom-center" />
+        <Row>
+            <Col md="5" className="offset-md-3">
+                {winMessage ? (
+                    <div className="d-grid gap-3 mb-2">
+                        <h1 className="text-warning text-uppercase text-center">
+                            {winMessage}
                         </h1>
-                    )}
-                    <div className="grid">{
-                        {itemArray.map((item, index) => (
-                            <Card color="info" onClick={ () => changeItem(index) }>
-                                <CardBody className="box">
-                                    <Icon name={item} />
-                                </CardBody>
-                            </Card>
-                        ))}
+                        <Button color="danger" size="lg" block onClick={reloadGame}>
+                             Reload the game
+                        </Button>                           
                     </div>
-                    <div className="d-grid gap-3 mt-2">
-                        <Button outline color="primary" size="sm" onClick={toggleTheme}>Toggle dark mode
-                        </Button>
-                    </div>
-                </Col>
-            </Row>
-        </Container>
+                ) : (
+                    <h1 className="text-center text-primary">
+                        {isCross ? "Cross" : "Circle"} turns
+                    </h1>
+                )}
+                <div className="grid">
+                    {itemArray.map((item, index) => (
+                        <Card color="info" onClick={ () => changeItem(index) }>
+                            <CardBody className="box">
+                                <Icon name={item} />
+                            </CardBody>
+                        </Card>
+                    ))}
+                </div>
+                <div className="d-grid gap-3 mt-2">
+                    <Button outline color="primary" size="sm" onClick={toggleTheme}>Toggle dark mode
+                    </Button>
+                </div>
+            </Col>
+        </Row>
+    </Container>
     );
 };
 
