@@ -11,8 +11,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import "./App.css"
 
-const crosssound = new Audio('../crosssound.wav');
-const circlesound = new Audio('../circlesound.wav');
 const reloadsound = new Audio('../reload.wav');
 const winsound = new Audio('../winsound.wav');
 const backgroundsound = new Audio('../backgroundsound.mp3');
