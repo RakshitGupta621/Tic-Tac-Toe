@@ -11,20 +11,35 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import "./App.css"
 
+const crosssound = new Audio('../crosssound.wav');
+const circlesound = new Audio('../circlesound.wav');
+const reloadsound = new Audio('../reload.wav');
+const winsound = new Audio('../winsound.wav');
+const backgroundsound = new Audio('../backgroundsound.mp3');
+
+window.onload = backgroundsound.play();
+
+backgroundsound.addEventListener("ended", () => {
+    backgroundsound.play();
+})
+
 const itemArray = new Array(9).fill("empty")
 
 const App = () => {
-
+    //Below is the use of React Hooks 
     const [isCross, setIsCross] = useState(false);
     const [winMessage, setWinMessage] = useState("");
 
-    const reloadGame = () => {
-        setIsCross(false); 
-        setWinMessage("");
-        itemArray.fill("empty", 0, 9); 
+    const reloadGame = () => {//reloads game
+        setIsCross(false); //no cross by default
+        setWinMessage(""); //no win message printed initially
+        itemArray.fill("empty", 0, 9); //empty initially from 0 to 9
+        backgroundsound.pause();
+        reloadsound.play();
+        backgroundsound.play();
     };
 
-    const checkIsWinner = () => { 
+    const checkIsWinner = () => { //checks winner
         if(//first row
             itemArray[0] === itemArray[1] &&
             itemArray[0] === itemArray[2] && 
@@ -78,17 +93,20 @@ const App = () => {
 
     /**https://fkhadra.github.io/react-toastify/introduction/ */
     const changeItem = itemNumber => {
-        if (winMessage) { 
+        if (winMessage) { //returns toast in color success
+            winsound.play();
+            backgroundsound.pause();
             return toast(winMessage, {type: "success", draggable: true});
         }
         if (itemArray[itemNumber] === "empty") {
-            itemArray[itemNumber] = isCross ? "cross" : "circle"   
-            setIsCross(!isCross) 
-        } else {
+            itemArray[itemNumber] = isCross ? ("cross"): ("circle")    //if isCross is true then we set it to cross else circle
+            setIsCross(!isCross) //setCross initally was false so set it to cross now basically it flips intial value to circle and cross
+           
+        } else {//returns toast in color error
             return toast("already filled 👆", { type: "error",
             draggable: true })
         }
-        checkIsWinner(); 
+        checkIsWinner(); //checks the winner this is the main logical part
     };
 
     const toggleTheme = () => {
@@ -100,7 +118,7 @@ const App = () => {
     /**https://react-bootstrap.netlify.app/components/buttons/#buttons */
     return (
         <Container className="p-5">
-            <ToastContainer position="bottom-center" />
+            <ToastContainer position="bottom-center" /> {/*This container is for the toast  */}
             <Row>
                 <Col md="5" className="offset-md-3">
                     {winMessage ? (
@@ -117,7 +135,8 @@ const App = () => {
                             {isCross ? "Cross" : "Circle"} turns
                         </h1>
                     )}
-                    <div className="grid">
+                    <div className="grid">{/*Here the grid is self defined classname whose style propertie are mentioned in the app.css*/}
+                    {/*The map loops through every single item in the itemArray and returns the index also.*/}
                         {itemArray.map((item, index) => (
                             <Card color="info" onClick={ () => changeItem(index) }>
                                 <CardBody className="box">
