@@ -14,7 +14,6 @@ import "./App.css"
 const reloadsound = new Audio('../reload.wav');
 const winsound = new Audio('../winsound.wav');
 const backgroundsound = new Audio('../backgroundsound.mp3');
-const alreadyfilled= new Audio('../alreadyfilled.wav');
 
 window.onload = backgroundsound.play();
 
@@ -101,7 +100,6 @@ const App = () => {
             setIsCross(!isCross) 
            
         } else {
-            alreadyfilled.play();
             return toast("already filled 👆", { type: "error",
             draggable: true })
         }
